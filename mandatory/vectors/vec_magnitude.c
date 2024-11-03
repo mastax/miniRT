@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:07:23 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/01 15:29:46 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/02 09:59:03 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ double	v_magnitude(t_vec vector)
 	return (sqrt(v_magnitude_2(vector)));
 }
 
-bool	equal(double a, double b)
+bool	equal(double a, double b)//from the book for exactly calculation
 {
 	return (fabs(a - b) < EPSILON);
 }
