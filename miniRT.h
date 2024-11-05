@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:01:11 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 16:12:10 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:15:56 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@ typedef struct s_vec
 	double	z;
 }	t_vec;
 
-typedef struct s_mlx
-{
-	void *mlx;
-	void *win;
-	t_cam *cam;
-	t_cam *begin;
-}   t_mlx;
-
 typedef struct s_cam
 {
 	int				idx;
@@ -54,6 +46,14 @@ typedef struct s_cam
 	int				endian;
 	struct s_cam	*next;
 }					t_cam;
+typedef struct s_mlx
+{
+	void *mlx;
+	void *win;
+	t_cam *cam;
+	t_cam *begin;
+}   t_mlx;
+
 
 typedef struct s_sphere
 {
@@ -86,6 +86,21 @@ typedef struct s_light
 	struct s_light	*next;
 }					t_light;
 
+union	u_figures
+{
+	t_sphere	sp;
+	t_plane		pl;
+	t_cylinder	cy;
+};
+typedef struct s_obj
+{
+	int				flag;
+	union u_figures	fig;
+	int				color;
+	int				texture;
+	t_vec			normal;
+	struct s_obj	*next;
+}					t_obj;
 // Structure definitions
 typedef struct s_obj_array {
 	int capacity;
@@ -99,15 +114,6 @@ typedef struct s_light_array {
 	t_light *lights;
 } t_light_array;
 
-typedef struct s_obj
-{
-	int				flag;
-	union u_figures	fig;
-	int				color;
-	int				texture;
-	t_vec			normal;
-	struct s_obj	*next;
-}					t_obj;
 
 typedef struct s_scene
 {
@@ -123,12 +129,6 @@ typedef struct s_scene
 	int				bgr;
 }					t_scene;
 
-union	u_figures
-{
-	t_sphere	sp;
-	t_plane		pl;
-	t_cylinder	cy;
-};
 
 //=-=-=-=-=-=-VECTORS=-=-=-=-=-=-// PART1
 double	v_magnitude_2(t_vec vector);

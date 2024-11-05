@@ -6,8 +6,7 @@ SRC_DIR = mandatory
 
 OBJ_DIR = objects
 
-DEPS = $(SRC_DIR)/parsing/parsing1.c $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/parsing_utils.c $(SRC_DIR)/vectors/vec2r.c $(SRC_DIR)/vectors/vec2r1.c $(SRC_DIR.c)/vectors/vec_mangnitude.c \
-	$(SRC_DIR)/vectors/addition_substra.c main.c $(SRC_DIR)/colors/colors.c
+DEPS = $(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/parsing_utils.c $(SRC_DIR)/parsing/parsing1.c $(SRC_DIR)/vectors/vec2r.c $(SRC_DIR)/vectors/vec2r1.c $(SRC_DIR.c)/vectors/vec_mangnitude.c $(SRC_DIR)/vectors/addition_substra.c main.c $(SRC_DIR)/colors/colors.c
 
 HEADERS = miniRT.h
 
