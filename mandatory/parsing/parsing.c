@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:56:01 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 15:33:09 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:25:51 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void parse_light(t_scene *data, char **str) {
     if (data->l != NULL)
-        error_message("Error only one light allowed\n");
+        report_error("Error only one light allowed\n");
     
     t_light *light = malloc(sizeof(t_light));
     if (!light)
-        error_message("Error malloc failure in parse light\n");
+        report_error("Error malloc failure in parse light\n");
     
     next(str);
     light->next = NULL;
@@ -33,7 +33,7 @@ void parse_light(t_scene *data, char **str) {
 void	parse_res(t_scene *data, char **str)
 {
 	if (data->res_init > 0)
-		error_message("(R) can only be declared once in the scene\n");
+		report_error("(R) can only be declared once in the scene\n");
 	else
 		data->res_init = 1;
 	next(str);
@@ -62,7 +62,7 @@ void parse_mandatory(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **
         parse_plane(obj_array, &ret);
         
     if (*ret != '\n')
-        error_message("param not valid\n");
+        report_error("param not valid\n");
     *str = ret;
 }
 
@@ -82,7 +82,7 @@ void parse_elements(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char *st
     }
     
     if (scene->res_init == 0 || scene->al_init == 0 || mlx->cam == NULL)
-        error_message("not enough elements to render a scene\n");
+        report_error("not enough elements to render a scene\n");
 }
 
 void parse_scene(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **av) {
@@ -98,11 +98,11 @@ void parse_scene(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **av) 
     write(1, "Initiating parsing...\n", 21);
     str = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
     if (!str)
-        error_message("Error in allocating memory\n");
+        report_error("Error in allocating memory\n");
     
     fd = open(av[1], 0);
     if (fd == -1)
-        error_message("Error opening the file given\n");
+        report_error("Error opening the file given\n");
     
     str = line(str, fd);
     new_line = ft_strjoin(str, "\n");

@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:36:29 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 14:36:44 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:26:40 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void init_obj_array(t_obj_array *array, int initial_capacity)
     array->count = 0;
     array->objects = malloc(sizeof(t_obj) * initial_capacity);
     if (!array->objects)
-        error_message("Error malloc failure in object array initialization\n");
+        report_error("Error malloc failure in object array initialization\n");
 }
 
 void add_object(t_obj_array *array, t_obj obj) {
@@ -27,7 +27,7 @@ void add_object(t_obj_array *array, t_obj obj) {
         array->capacity *= 2;
         t_obj *new_array = realloc(array->objects, sizeof(t_obj) * array->capacity);
         if (!new_array)
-            error_message("Error realloc failure in add_object\n");
+            report_error("Error realloc failure in add_object\n");
         array->objects = new_array;
     }
     array->objects[array->count++] = obj;
@@ -39,7 +39,7 @@ void parse_plane(t_obj_array *array, char **str) {
     obj.flag = PL;
     next(str);
     obj.fig.pl.p = parse_p3(str);
-    obj.normal = normalize(parse_p3(str));
+    obj.normal = normalise(parse_p3(str));
     obj.texture = 0;
     obj.color = parse_color(str);
     
@@ -65,7 +65,7 @@ void parse_cylinder(t_obj_array *array, char **str) {
 
 void parse_camera(t_mlx *mlx, t_scene *data, char **str) {
     if (data->c_init > 0)
-        error_message("(C) can only be declared once in the scene\n");
+        report_error("(C) can only be declared once in the scene\n");
     
     data->c_init = 1;
     t_cam cam;
@@ -73,12 +73,12 @@ void parse_camera(t_mlx *mlx, t_scene *data, char **str) {
     next(str);
     data->cam_nb = 0; // Since we're only using one camera
     cam.o = parse_p3(str);
-    cam.nv = normalize(parse_p3(str));
+    cam.nv = normalise(parse_p3(str));
     cam.fov = stoi(str);
     in_range(cam.fov, 0, 180, "camera");
     
     mlx->cam = malloc(sizeof(t_cam));
     if (!mlx->cam)
-        error_message("Error malloc failure in camera allocation\n");
+        report_error("Error malloc failure in camera allocation\n");
     *mlx->cam = cam;
 }

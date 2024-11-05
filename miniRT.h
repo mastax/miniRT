@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:01:11 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 17:15:56 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:27:18 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ t_vec	scal_x_vec(double n, t_vec p);
 void	color_definition(double red, double green, double blue, double color[3]);
 
 //=-=-=-=-=-=-=-=-PARSING=-=-=-=-=-=-
-
+void	report_error(char *str);
 t_vec	parse_p3(char **str);
 double	stof(char **str);
 

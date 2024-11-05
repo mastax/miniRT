@@ -6,11 +6,21 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:50:19 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 15:06:18 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:24:56 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../miniRT.h"
+
+void	report_error(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		write(2, &str[i], 1);
+	exit (1);
+}
 
 t_vec	parse_p3(char **str)
 {
