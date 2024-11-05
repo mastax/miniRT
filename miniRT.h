@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:01:11 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/02 17:29:33 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:12:10 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,15 @@
 # include <stdbool.h>
 # include <math.h>
 
+# include <unistd.h>
+# include <stdlib.h>
+
 # define EPSILON 0.00001
+
+# define SP 0
+# define PL 1
+# define CY 4
+# define NUM_THREADS 4
 
 typedef struct s_vec
 {
@@ -27,54 +35,99 @@ typedef struct s_vec
 
 typedef struct s_mlx
 {
-    void *mlx;
-    void *win;
-    t_cam *cam;
-    t_cam *begin;
+	void *mlx;
+	void *win;
+	t_cam *cam;
+	t_cam *begin;
 }   t_mlx;
 
 typedef struct s_cam
 {
- int    idx;
- t_vec   o;
- t_vec   nv;
- int    fov;
- void   *img_ptr;
- int    *px_img;
- int    bits_per_pixel;
- int    size_line;
- int    endian;
- struct s_cam *next;
-}   t_cam;
+	int				idx;
+	t_vec			o;
+	t_vec			nv;
+	int				fov;
+	void			*img_ptr;
+	int				*px_img;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+	struct s_cam	*next;
+}					t_cam;
 
-typedef struct s_resolution
+typedef struct s_sphere
 {
-	int	res_init;// Indicates whether the resolution has been initialized (1 for yes, 0 for no)
-	int	xres;            // Width of the scene in pixels
-    int	yres;            // Height of the scene in pixels
-    int	cam_nb;          // Number of cameras in the scene
-    t_light	*l;             // Pointer to a list of light sources in the scene
-    int	al_init;         // Indicates whether ambient light has been initialized (1 for yes, 0 for no)
-    double	ambient_light;   // Intensity of the ambient light
-    int	al_color;        // Color of the ambient light (usually in RGB format)
-    int    bgr;             // Background color of the scene
-} t_scene;
+	t_vec	c;
+	double	r;
+	int		inside;
+}			t_sphere;
 
-typedef struct  s_light
+typedef struct s_plane
 {
- t_vec   o;
- double   br;
- int    color;
- struct s_light *next;
-}     t_light;
+	t_vec	p;
+}			t_plane;
 
-union   u_figures
+typedef struct s_cylinder
 {
- t_sphere sp;
- t_plane  pl;
- t_square sq;
- t_cylinder cy;
- t_triangle tr;
+	t_vec	c;
+	t_vec	nv;
+	double	r;
+	double	h;
+	double	dist1;
+	double	dist2;
+}			t_cylinder;
+
+typedef struct s_light
+{
+	t_vec			o;
+	double			br;
+	int				color;
+	double			ratio;
+	struct s_light	*next;
+}					t_light;
+
+// Structure definitions
+typedef struct s_obj_array {
+	int capacity;
+	int count;
+	t_obj *objects;
+} t_obj_array;
+
+typedef struct s_light_array {
+	int capacity;
+	int count;
+	t_light *lights;
+} t_light_array;
+
+typedef struct s_obj
+{
+	int				flag;
+	union u_figures	fig;
+	int				color;
+	int				texture;
+	t_vec			normal;
+	struct s_obj	*next;
+}					t_obj;
+
+typedef struct s_scene
+{
+	int				res_init;
+	int				xres;
+	int				yres;
+	int				cam_nb;
+	t_light			*l;
+	int				al_init;
+	int				c_init;
+	double			ambient_light;
+	int				al_color;
+	int				bgr;
+}					t_scene;
+
+union	u_figures
+{
+	t_sphere	sp;
+	t_plane		pl;
+	t_cylinder	cy;
 };
 
 //=-=-=-=-=-=-VECTORS=-=-=-=-=-=-// PART1
@@ -89,5 +142,29 @@ t_vec	vec_mutiplication_wise(t_vec v1, t_vec v2);
 t_vec	vec_division(t_vec v1, double m);
 double	vec_dot(t_vec v1, t_vec v2);
 t_vec	vec_cross(t_vec v1, t_vec v2);
+
+t_vec	normalise(t_vec v);
+double	vcos(t_vec x, t_vec y);
+double	vsin(t_vec x, t_vec y);
+t_vec	scal_x_vec(double n, t_vec p);
 //=-=-=-=-=-=-=-=COLORS=-=-=-=-=-=-=-
+
+void	color_definition(double red, double green, double blue, double color[3]);
+
+//=-=-=-=-=-=-=-=-PARSING=-=-=-=-=-=-
+
+t_vec	parse_p3(char **str);
+double	stof(char **str);
+
+void    init_obj_array(t_obj_array *array, int initial_capacity);
+void    add_object(t_obj_array *array, t_obj obj);
+void    parse_plane(t_obj_array *array, char **str);
+void    parse_cylinder(t_obj_array *array, char **str);
+void    parse_camera(t_mlx *mlx, t_scene *data, char **str);
+void    parse_light(t_scene *data, char **str);
+void    parse_res(t_scene *data, char **str);
+void    parse_mandatory(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **str);
+void    parse_elements(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char *str);
+void    parse_scene(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **av);
+
 #endif
