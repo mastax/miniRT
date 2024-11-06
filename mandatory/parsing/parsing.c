@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:56:01 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 17:25:51 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/06 16:05:34 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void parse_light(t_scene *data, char **str) {
     if (!light)
         report_error("Error malloc failure in parse light\n");
     
-    next(str);
+    // next(str);
     light->next = NULL;
     light->o = parse_p3(str);
     light->ratio = stof(str);
@@ -83,6 +83,26 @@ void parse_elements(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char *st
     
     if (scene->res_init == 0 || scene->al_init == 0 || mlx->cam == NULL)
         report_error("not enough elements to render a scene\n");
+}
+
+char	*line(char *str, int fd)
+{
+	char	buff[BUFFER_SIZE + 1];
+	char	*ptr;
+	int		retrn;
+
+	retrn = read(fd, buff, BUFFER_SIZE);
+	while (retrn > 0)
+	{
+		ptr = str;
+		buff[retrn] = '\0';
+		str = ft_strjoin(str, buff);
+		if (!str)
+			return (NULL);
+		free(ptr);
+		retrn = read(fd, buff, BUFFER_SIZE);
+	}
+	return (str);
 }
 
 void parse_scene(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **av) {

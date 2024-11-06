@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:01:11 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 17:27:18 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:01:25 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
+
 
 # define EPSILON 0.00001
+
+# define BUFFER_SIZE 32
 
 # define SP 0
 # define PL 1
@@ -147,6 +151,12 @@ t_vec	normalise(t_vec v);
 double	vcos(t_vec x, t_vec y);
 double	vsin(t_vec x, t_vec y);
 t_vec	scal_x_vec(double n, t_vec p);
+void	next(char **str);
+void	in_range(double nb, double min, double max, char *function);
+char	*line(char *str, int fd);
+
+char	*ft_strjoin(char *s1, char *s2);
+
 //=-=-=-=-=-=-=-=COLORS=-=-=-=-=-=-=-
 
 void	color_definition(double red, double green, double blue, double color[3]);
@@ -155,6 +165,9 @@ void	color_definition(double red, double green, double blue, double color[3]);
 void	report_error(char *str);
 t_vec	parse_p3(char **str);
 double	stof(char **str);
+int	stoi(char **str);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*ft_strcat(char *dest, char *src);
 
 void    init_obj_array(t_obj_array *array, int initial_capacity);
 void    add_object(t_obj_array *array, t_obj obj);
@@ -166,5 +179,8 @@ void    parse_res(t_scene *data, char **str);
 void    parse_mandatory(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **str);
 void    parse_elements(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char *str);
 void    parse_scene(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **av);
+void	parse_ambient_light(t_scene *data, char **str);
+void	parse_sphere(t_obj_array *obj_array, char **str);
+int	parse_color(char **str);
 
 #endif

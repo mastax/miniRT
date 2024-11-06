@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:56:55 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 16:07:29 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:07:55 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char **av)
 {
 	// t_wrapper	wrapper[NUM_THREADS];
-	// t_mlx		mlx;
+	t_mlx		mlx;
 	t_scene		scene;
 	t_obj		*lst;
 
