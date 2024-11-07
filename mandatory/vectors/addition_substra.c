@@ -6,11 +6,11 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:08:57 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/01 15:58:02 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:26:30 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../miniRT.h"
 
 
 t_vec	vec_plus(t_vec v1, t_vec v2)/*addition*/

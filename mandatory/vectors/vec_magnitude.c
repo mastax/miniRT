@@ -6,11 +6,11 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 11:07:23 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/02 09:59:03 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:25:33 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../miniRT.h"
 
 t_vec	vec_mutiplication_wise(t_vec v1, t_vec v2)/*multiplication*/
 {

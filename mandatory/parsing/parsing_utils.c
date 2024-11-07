@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:50:19 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/06 18:01:01 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:20:10 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,4 +155,50 @@ int	stoi(char **str)
 		i = i * 10 + (*((*str)++) - '0');
 	next(str);
 	return (i * neg);
+}
+
+void	comma(char **str)
+{
+	if (**str != ',')
+		report_error("parameters bad formatted\n");
+	(*str)++;
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+	{
+		return (1);
+	}
+	return (0);
+}
+
+char	*ft_strdup(const char *src)
+{
+	int		i;
+	char	*dst;
+
+	i = 0;
+	dst = (char *)malloc(sizeof(char) * ft_strlen(src) + 1);
+	if (!dst)
+		return (NULL);
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }

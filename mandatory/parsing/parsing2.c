@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:21:28 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/06 15:49:36 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:35:10 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	parse_ambient_light(t_scene *data, char **str)
 {
 	if (data->al_init > 0)
-		error_message("(A) can only be declared once in the scene\n");
+		report_error("(A) can only be declared once in the scene\n");
 	else
 		data->al_init = 1;
 	next(str);

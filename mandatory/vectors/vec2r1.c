@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 15:34:23 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/02 11:53:44 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:26:16 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,8 @@ t_vec	scal_x_vec(double n, t_vec p)
 	v.y = n * p.y;
 	v.z = n * p.z;
 	return (v);
+}
+double	mod(t_vec vector)
+{
+	return (sqrt(vec_dot(vector, vector)));
 }

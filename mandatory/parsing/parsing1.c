@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:36:29 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/05 17:26:40 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:20:23 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void parse_cylinder(t_obj_array *array, char **str) {
     obj.flag = CY;
     next(str);
     obj.fig.cy.c = parse_p3(str);
-    obj.fig.cy.nv = normalize(parse_p3(str));
+    obj.fig.cy.nv = normalise(parse_p3(str));
     obj.fig.cy.r = stof(str) / 2;
     in_range(obj.fig.cy.r, 0, INFINITY, "cylinder");
     obj.fig.cy.h = stof(str);

@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:01:11 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/06 18:01:25 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/07 10:22:20 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 
 
 # define EPSILON 0.00001
@@ -146,6 +147,7 @@ t_vec	vec_mutiplication_wise(t_vec v1, t_vec v2);
 t_vec	vec_division(t_vec v1, double m);
 double	vec_dot(t_vec v1, t_vec v2);
 t_vec	vec_cross(t_vec v1, t_vec v2);
+double	mod(t_vec vector);
 
 t_vec	normalise(t_vec v);
 double	vcos(t_vec x, t_vec y);
@@ -168,6 +170,9 @@ double	stof(char **str);
 int	stoi(char **str);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
 char	*ft_strcat(char *dest, char *src);
+int	ft_isdigit(int c);
+char	*ft_strdup(const char *src);
+size_t	ft_strlen(const char *str);
 
 void    init_obj_array(t_obj_array *array, int initial_capacity);
 void    add_object(t_obj_array *array, t_obj obj);
@@ -182,5 +187,5 @@ void    parse_scene(t_mlx *mlx, t_scene *scene, t_obj_array *obj_array, char **a
 void	parse_ambient_light(t_scene *data, char **str);
 void	parse_sphere(t_obj_array *obj_array, char **str);
 int	parse_color(char **str);
-
+void	comma(char **str);
 #endif
