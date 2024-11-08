@@ -6,7 +6,7 @@
 /*   By: elel-bah <elel-bah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:01:11 by elel-bah          #+#    #+#             */
-/*   Updated: 2024/11/07 10:22:20 by elel-bah         ###   ########.fr       */
+/*   Updated: 2024/11/08 17:59:28 by elel-bah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,10 @@ char	*ft_strjoin(char *s1, char *s2);
 //=-=-=-=-=-=-=-=COLORS=-=-=-=-=-=-=-
 
 void	color_definition(double red, double green, double blue, double color[3]);
+int	cproduct(int color, double coef);
+int	cadd(int color_a, int color_b);
+int	color_x_light(int color, double rgb[3]);
+int	color_difference(int color1, int color2);
 
 //=-=-=-=-=-=-=-=-PARSING=-=-=-=-=-=-
 void	report_error(char *str);
@@ -188,4 +192,12 @@ void	parse_ambient_light(t_scene *data, char **str);
 void	parse_sphere(t_obj_array *obj_array, char **str);
 int	parse_color(char **str);
 void	comma(char **str);
+
+//=-=-=-=-=-=-=-=MLX=-=-=-=-=-=-=-=-=--
+
+void	init_mlx(t_mlx *mlx, t_scene *data);
+int	next_cam(int keycode, t_mlx *mlx);
+int	close_program(void *param);
+void	graphic_loop(t_mlx mlx, t_scene data);
+
 #endif
